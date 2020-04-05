@@ -14,20 +14,20 @@ interface TJob {
   country: string;
   tags: string[];
 }
-// rgba(225, 192, 132)// yellow
-// rgb(182, 212, 103)// green
 
 const JobListing: FC<TJob> = (props) => {
   const { open, title, company, url, country, tags, index } = props;
   return (
-    <Listing style={{ marginBottom: "0.5em" }}>
-      <Link href={url}>
-        <a target="_blank">
-          {" "}
-          {index}. {title} | {company} | {country}
-        </a>
-      </Link>
-      {/* <span>{tags[0]}</span> */}
+    <Listing>
+      <a href={url} target="_blank">
+        <div className="number">{index}.</div>
+        <div className="info">
+          {title} <br />{" "}
+          <span className="sub">
+            {company} | {country}
+          </span>
+        </div>
+      </a>
     </Listing>
   );
 };
@@ -35,7 +35,15 @@ const JobListing: FC<TJob> = (props) => {
 const IndexPage = () => {
   const [db] = useState<TJob[]>(dbData);
   return (
-    <Layout title="Home | Next.js + TypeScript Example">
+    <Layout title="Hack For Good">
+      <a
+        style={{ color: "rgb(182, 217, 107)" }}
+        href="https://github.com/Wesselvdp/hackforgood"
+        target="_blank"
+      >
+        Contribute
+      </a>
+
       <Intro>
         <h1>
           You're a 👨‍💻 and want to contribute something to the 🌎 while earning a
@@ -47,17 +55,35 @@ const IndexPage = () => {
           brilliant mind, <Accent>hack for good</Accent>.
         </p>
       </Intro>
-      {db.map(
-        (job: TJob, i: number) =>
-          job.open && <JobListing {...job} index={i + 1} key={i} />
-      )}
+      <List>
+        {db.map(
+          (job: TJob, i: number) =>
+            job.open && <JobListing {...job} index={i + 1} key={i} />
+        )}
+      </List>
     </Layout>
   );
 };
 
-const Listing = styled.div`
+const Listing = styled.li`
+  list-style: none;
+  margin-bottom: 1em;
+
+  .number {
+    display: inline-block;
+    padding-right: 0.75em;
+  }
+  .info {
+    display: inline-block;
+  }
+  .sub {
+    color: rgb(182, 217, 107);
+    opacity: 0.6;
+    font-size: 0.8em;
+  }
   a {
     color: inherit;
+    display: flex;
     text-decoration: none;
     &:hover {
       color: rgb(234, 140, 98);
@@ -66,6 +92,9 @@ const Listing = styled.div`
   }
 `;
 
+const List = styled.ul`
+  padding-left: 0;
+`;
 const Intro = styled.div`
   max-width: 800px;
 `;

@@ -27,7 +27,7 @@ const Layout: FC<Props> = ({
         backgroundColor: "rgb(7,23,33)",
         margin: "0",
         padding: "15px",
-        color: "rgb(142,213, 198)",
+        color: "rgba(142,213, 198, 1)",
         fontFamily: "Inconsolata, monospace",
       }}
     >
