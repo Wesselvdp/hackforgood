@@ -36,10 +36,17 @@ const IndexPage = () => {
   const [db] = useState<TJob[]>(dbData);
   return (
     <Layout title="Home | Next.js + TypeScript Example">
-      <h1>
-        You're a 👨‍💻 and want to contribute something to the 🌎 while earning a
-        💸.
-      </h1>
+      <Intro>
+        <h1>
+          You're a 👨‍💻 and want to contribute something to the 🌎 while earning a
+          💸.
+        </h1>
+        <p>
+          All the jobs below are <Accent>tech jobs</Accent> for companies that
+          are trying to make the world a better place. You're a hacker with a
+          brilliant mind, <Accent>hack for good</Accent>.
+        </p>
+      </Intro>
       {db.map(
         (job: TJob, i: number) =>
           job.open && <JobListing {...job} index={i + 1} key={i} />
@@ -57,6 +64,14 @@ const Listing = styled.div`
       cursor: pointer;
     }
   }
+`;
+
+const Intro = styled.div`
+  max-width: 800px;
+`;
+
+const Accent = styled.span`
+  color: rgb(234, 140, 98);
 `;
 
 export default IndexPage;
