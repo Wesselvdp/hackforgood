@@ -20,15 +20,15 @@ interface TJob {
 const JobListing: FC<TJob> = (props) => {
   const { open, title, company, url, country, tags, index } = props;
   return (
-    <div style={{ marginBottom: "0.5em" }}>
+    <Listing style={{ marginBottom: "0.5em" }}>
       <Link href={url}>
-        <Anchor target="_blank">
+        <a target="_blank">
           {" "}
           {index}. {title} | {company} | {country}
-        </Anchor>
+        </a>
       </Link>
       {/* <span>{tags[0]}</span> */}
-    </div>
+    </Listing>
   );
 };
 
@@ -48,12 +48,14 @@ const IndexPage = () => {
   );
 };
 
-const Anchor = styled.a`
-  text-decoration: none;
-
-  &:hover {
-    color: rgb(234, 140, 98);
-    cursor: pointer;
+const Listing = styled.div`
+  a {
+    color: inherit;
+    text-decoration: none;
+    &:hover {
+      color: rgb(234, 140, 98);
+      cursor: pointer;
+    }
   }
 `;
 
