@@ -14,10 +14,26 @@ const Layout: FC<Props> = ({
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap"
+        rel="stylesheet"
+      />
+
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <header></header>
-    {children}
+    <header> </header>
+    <body
+      style={{
+        backgroundColor: "rgb(7,23,33)",
+        margin: "0",
+        padding: "15px",
+        color: "rgb(142,213, 198)",
+        fontFamily: "Inconsolata, monospace",
+      }}
+    >
+      {children}
+    </body>
+
     <footer></footer>
   </div>
 );

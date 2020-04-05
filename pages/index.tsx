@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { useState, FC } from "react";
 import Layout from "@components/Layout";
+import styled from "styled-components";
 
 import dbData from "../db/db.json";
 
 interface TJob {
+  index?: number;
   open: boolean;
   title: string;
   company: string;
@@ -12,16 +14,18 @@ interface TJob {
   country: string;
   tags: string[];
 }
+// rgba(225, 192, 132)// yellow
+// rgb(182, 212, 103)// green
 
 const JobListing: FC<TJob> = (props) => {
-  const { open, title, company, url, country, tags } = props;
+  const { open, title, company, url, country, tags, index } = props;
   return (
-    <div style={{ color: "blue" }}>
+    <div style={{ marginBottom: "0.5em" }}>
       <Link href={url}>
-        <a>
+        <Anchor target="_blank">
           {" "}
-          {title} - {company} | {country}
-        </a>
+          {index}. {title} | {company} | {country}
+        </Anchor>
       </Link>
       {/* <span>{tags[0]}</span> */}
     </div>
@@ -36,9 +40,21 @@ const IndexPage = () => {
         You're a 👨‍💻 and want to contribute something to the 🌎 while earning a
         💸.
       </h1>
-      {db.map((job) => job.open && <JobListing {...job} />)}
+      {db.map(
+        (job: TJob, i: number) =>
+          job.open && <JobListing {...job} index={i + 1} key={i} />
+      )}
     </Layout>
   );
 };
+
+const Anchor = styled.a`
+  text-decoration: none;
+
+  &:hover {
+    color: rgb(234, 140, 98);
+    cursor: pointer;
+  }
+`;
 
 export default IndexPage;
